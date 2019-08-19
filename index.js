@@ -1,11 +1,17 @@
+#!/usr/bin/env node
+
 const detect = require("./src/detect");
 const sharp = require("sharp");
+const processArgs = require("./src/arguments");
 
-const file = "./input.png";
-const faceRequeriment = false;
-const facesLimit = 0;
-const widthLimit = 1200;
-const heightLimit = 1200;
+const {
+    file,
+    output,
+    faceRequeriment,
+    facesLimit,
+    widthLimit,
+    heightLimit
+} = processArgs();
 
 async function limit(file) {
     const image = sharp(file);
@@ -16,7 +22,7 @@ async function limit(file) {
 
         await image.resize(widthLimit, heightLimit, {
             fit: "outside"
-        }).toFile(file);
+        }).toFile(output);
     }
 }
 
